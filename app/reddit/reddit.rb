@@ -1,16 +1,15 @@
 require "redd"
+require_relative '../Spotify/spotify'
 
 class Raddit
   def initialize()
-    puts 'Raddit:INITIALIZE'
     r = Redd.it(:userless, 'aq68iSIfYMH7Fg', 'HfWy8PDguxsqgF-DZa8t_SKCX0g')
     r.authorize!
 
     hot = r.get_hot("hiphopheads")
-    # puts hot.first.inspect
-    hot.each { |link|
-      puts "#{link.title} by /u/#{link.author}"
-    }
+
+    # I need you to initialize like this
+    Spotify.new([{ :artist => 'Stormzy', :track => 'Know Me From' }, { :artist => 'Drake', :track => 'Too Much' }])
   end
   def bark
     puts 'Ruff! Ruff!'

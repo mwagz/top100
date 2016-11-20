@@ -1,24 +1,28 @@
+require 'pp'
+require 'rspotify'
+
 class Spotify
-  TRACKS = ['https://open.spotify.com/track/1JyXEzDAzuGfeAFT4QLPh2', 'https://open.spotify.com/track/1jQn45kNhYtgwQWzjxbt4G', 'https://open.spotify.com/track/4G1mjYAyCRJwW9AZEaafKB', 'https://open.spotify.com/track/0CAkIqdfKNNWZRbtIquUpL', 'https://open.spotify.com/track/6m3ZWIXhjoV76syT1j2oE9']
-
-  def initialize()
-    puts 'Spotify:INITIALIZE'
+  def initialize(crawl_results)
+    @tracks = Array.new()
+    get_tracks(crawl_results)
   end
 
-  def sort_tracks
-    puts '---====||* SORTING TRACKS *||====---'
-    songs = TRACKS.collect { |track|
-      track.delete 'https://open.spotify.com/track/'
+  def get_tracks(songs)
+    songs.each { |track|
+      puts "Finding Track: #{track[:track]} by #{track[:artist]}"
+      response = RSpotify::Track.search(track[:track], market: 'US');
+
+      # HOLY FUCK - I WROTE SOME REAL RUBY
+      filtered = response.select { |res| res.artists.first.name == track[:artist] }
+      @tracks.push(filtered.first.id) # This gives me just the ID of the Track Object
+      # @tracks.push(filtered.first) # This gives me the actual Track instance.
     }
 
-    return songs
+    # TODO: Delete this
+    pp @tracks
   end
 
-  def get_tracks(tracks)
-    puts '---====||* GETTING TRACKS *||====---'
-    tracks.collect! { |track|
-      puts "Finding Track: #{track}"
-      puts RSpotify::Base.find(track, 'user')
-    }
+  def build_playlist
+
   end
 end
