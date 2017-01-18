@@ -3,10 +3,10 @@ require_relative '../Spotify/spotify'
 
 class Raddit
   def initialize()
-    r = Redd.it(:userless, 'aq68iSIfYMH7Fg', 'HfWy8PDguxsqgF-DZa8t_SKCX0g')
-    r.authorize!
+    # r = Redd.it(:userless, 'aq68iSIfYMH7Fg', 'HfWy8PDguxsqgF-DZa8t_SKCX0g')
+    # r.authorize!
 
-    hot = r.get_hot("hiphopheads")
+    # hot = r.get_hot("hiphopheads")
 
     # I need you to initialize like this
     Spotify.new([{ :artist => 'Stormzy', :track => 'Know Me From' }, { :artist => 'Drake', :track => 'Too Much' }])

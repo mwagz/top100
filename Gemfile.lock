@@ -53,6 +53,7 @@ PLATFORMS
 
 DEPENDENCIES
   redd
+  rest-client
   rspotify
 
 BUNDLED WITH
